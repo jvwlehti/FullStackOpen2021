@@ -1,7 +1,7 @@
 title Tehtävä 0.4
 
 selain->palvelin: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
-palvelin-->selain: Palvelin ilmoittaa POST-metodista 
+palvelin-->selain: uudelleenohjauspyyntö joka kehottaa tekemään uuden HTTP GET-pyynnön
 selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
 palvelin-->selain: Palauttaa HTML-koodin selaimelle kokonaisuudessaan
 selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
