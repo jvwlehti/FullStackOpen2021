@@ -1,0 +1,37 @@
+title Tehtävä 0.5&0.6
+
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa
+palvelin-->selain: Palauttaa HTML-koodin selaimelle kokonaisuudessaan
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+palvelin-->selain: Palauttaa main.css muotoilutiedoston
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+palvelin-->selain: Palauttaa spa.js JavaScript-kooditiedoston
+
+note over selain:
+selain aloittaa js-koodin suorittamisen 
+ja pyytää JSON-datan palvelimelta
+end note
+
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+palvelin-->selain: [{ content: "asd", date: "2021-10-27" }, ...]
+note over selain:
+selain suorittaa tapahtumakäsittelijän, jonka
+tehtävänä on renderöidä muistiinpanot ruudulle
+main.css määrittämässä muodossa
+end note
+note over selain
+painetaan "tallenna"-nappia
+end note
+note over selain
+Selaimeen ladattu js-koodi hakee
+lomake-elementin ja tapahtumankäsittelijä
+vastaa lomakkeen lähettämisestä
+
+Oletusarvoinen toiminta estetään js-koodin avulla,
+ja koodi luo muistiinpanon lisäten sen listalle,
+piirtää muistiinpanot uudelleen ja lähettää sen
+palvelimelle
+end note
+selain->palvelin: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+
+palvelin-->selain: Palvelin vastaa statuskoodilla 201 Created
