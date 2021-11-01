@@ -1,0 +1,92 @@
+import React, { useState } from 'react'
+
+
+const Otsikko = ({ otsikko }) => {
+  return (
+    <h1>
+      {otsikko}
+    </h1>)
+}
+
+const Nappi = ({ handleClick, teksti }) => {
+  return (
+    <button onClick={handleClick}>
+      {teksti}
+    </button>
+  )
+}
+
+const Statistics = ({ pos, kaikki, summa }) => {
+  let posit = (pos / kaikki) * 100
+  let ka = summa / kaikki
+
+  if (pos === 0 & summa === 0) {
+    return (
+      <div>
+        Palautetta ei ole annettu/No feedback given
+      </div>
+    )
+  }
+  return (
+    <div>
+      Positiivisia/Positive {posit} %
+      <div>
+        Keskiarvo/average {ka}
+      </div>
+    </div>
+  )
+}
+
+const Tilanne = ({ teksti, tulos, all }) => {
+  if (all === 0){
+    return(<div></div>)
+  }
+  return (
+    <div>
+      {teksti} {tulos}
+    </div>
+  )
+}
+
+const App = () => {
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
+  const [all, setAll] = useState(0)
+  const [sum, setSum] = useState(0)
+
+  const handleGood = () => {
+    setSum(sum + 1)
+    setAll(all + 1)
+    setGood(good + 1)
+  }
+
+  const handleNeutral = () => {
+    setAll(all + 1)
+    setNeutral(neutral + 1)
+  }
+
+  const handleBad = () => {
+    setSum(sum - 1)
+    setAll(all + 1)
+    setBad(bad + 1)
+  }
+
+
+  return (
+    <div>
+      <Otsikko otsikko='Anna palautetta / Give feedback' />
+      <Nappi handleClick={handleGood} teksti='Hyvä/Good' />
+      <Nappi handleClick={handleNeutral} teksti='Neutraali/Neutral' />
+      <Nappi handleClick={handleBad} teksti='Huono/Bad' />
+      <Otsikko otsikko='Tilastot/Statistics' />
+      <Tilanne teksti='Hyvä/Good' tulos={good} all = {all}/>
+      <Tilanne teksti='Neutraali/Neutral' tulos={neutral} all = {all}/>
+      <Tilanne teksti='Huono/Bad' tulos={bad} all = {all}/>
+      <Tilanne teksti='Kaikki/All' tulos={all} all = {all}/>
+      <Statistics summa={sum} kaikki={all} pos={good} kaikki={all} />
+    </div>
+  )
+}
+
+export default App
