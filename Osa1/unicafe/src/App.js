@@ -17,8 +17,9 @@ const Nappi = ({ handleClick, teksti }) => {
 }
 
 const Statistics = ({ pos, neg, neut, all, summa }) => {
-  let posit = (pos / all) * 100
-  let ka = summa / all
+  let posit = ((pos / all) * 100)
+  let ka = Math.round((summa / all) * 100) / 100
+  let positR = Math.round(posit* 100) /100
 
   if (pos === 0 & summa === 0) {
     return (
@@ -35,7 +36,7 @@ const Statistics = ({ pos, neg, neut, all, summa }) => {
       <Tilanne teksti='Bad' tulos={neg} all={all} merkki='' />
       <Tilanne teksti='All' tulos={all} all={all} merkki='' />
       <Tilanne teksti='average' tulos={ka} merkki='' />
-      <Tilanne teksti='Positive' tulos={posit} merkki='%' />
+      <Tilanne teksti='Positive' tulos={positR} merkki='%' />
       </thead>
     </table>
 
