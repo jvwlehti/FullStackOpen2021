@@ -28,14 +28,16 @@ const Statistics = ({ pos, neg, neut, all, summa }) => {
     )
   }
   return (
-    <div>
-      <Tilanne teksti='Hyvä/Good' tulos={pos} all={all} merkki='' />
-      <Tilanne teksti='Neutraali/Neutral' tulos={neut} all={all} merkki='' />
-      <Tilanne teksti='Huono/Bad' tulos={neg} all={all} merkki='' />
-      <Tilanne teksti='Kaikki/All' tulos={all} all={all} merkki='' />
-      <Tilanne teksti='Keskiarvo/average' tulos={ka} merkki='' />
-      <Tilanne teksti='Positiivisia/Positive' tulos={posit} merkki='%' />
-    </div>
+    <table>
+      <thead>
+      <Tilanne teksti='Good' tulos={pos} all={all} merkki='' />
+      <Tilanne teksti='Neutral' tulos={neut} all={all} merkki='' />
+      <Tilanne teksti='Bad' tulos={neg} all={all} merkki='' />
+      <Tilanne teksti='All' tulos={all} all={all} merkki='' />
+      <Tilanne teksti='average' tulos={ka} merkki='' />
+      <Tilanne teksti='Positive' tulos={posit} merkki='%' />
+      </thead>
+    </table>
 
   )
 }
@@ -45,9 +47,9 @@ const Tilanne = ({ teksti, tulos, all, merkki }) => {
     return (<div></div>)
   }
   return (
-    <div>
-      {teksti} {tulos} {merkki}
-    </div>
+    <tr>
+      <td>{teksti}</td><td> {tulos}</td><td>{merkki}</td>
+    </tr>
   )
 }
 
