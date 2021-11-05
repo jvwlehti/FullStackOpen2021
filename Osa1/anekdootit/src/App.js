@@ -9,6 +9,25 @@ const Button = ({ handleClick, text }) => {
   )
 }
 
+const Otsikko = ({ text }) => {
+  return (
+    <h2>{text}</h2>
+  )
+}
+
+/*const Best = ({points, anecdotes}) => {
+
+
+
+  return (
+    <div>
+
+    </div>
+    
+  )
+
+}*/
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -21,9 +40,8 @@ const App = () => {
   ]
 
   const [selected, setSelected] = useState(0)
-  const [points, setPoints] = useState({ 0: 0, 1: 0, 2: 0, 3:
-     0, 4: 0, 5:0, 6:0
-  })
+  const [points, setPoints] = useState(new Array(anecdotes.length).fill(0))
+  const [best, setBest] = useState(0)
 
   const nextAnec = () => {
     let valittu = Math.floor(Math.random() * (anecdotes.length))
@@ -32,21 +50,29 @@ const App = () => {
   }
 
   const vote = () => {
-    const copy = {...points}
-      copy[selected] += 1
+    const copy = [...points]
+    copy[selected] += 1
     setPoints(copy)
-  
-}
 
+    points.forEach(element => {
+      if (element > best) {
+        setBest(element)
+      }
+    });
+  }
 
-return (
-  <div>
-    <p>{anecdotes[selected]}</p>
-    <p> has {points[selected]} votes</p>
-    <Button handleClick={vote} text='vote' />
-    <Button handleClick={nextAnec} text='next anecdote' />
-  </div>
-)
+  return (
+    <div>
+      <Otsikko text='Anecdote of the day' />
+      <p>{anecdotes[selected]}</p>
+      <p> has {points[selected]} votes</p>
+      <Button handleClick={vote} text='vote' />
+      <Button handleClick={nextAnec} text='next anecdote' />
+      <Otsikko text='Most valuable anecdote' />
+      <p>{anecdotes[points.indexOf(best)]}</p>
+      <p> has {best} votes</p>
+    </div>
+  )
 }
 
 export default App
