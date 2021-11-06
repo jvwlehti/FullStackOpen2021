@@ -29,6 +29,11 @@ const Best = ({points, anecdotes}) => {
   console.log('paras', paras)
   console.log(indeksi)
 
+  if (paras === 0) {
+    return(
+      <div>No votes yet</div>
+    )
+  }
 
   return (
     <div>
