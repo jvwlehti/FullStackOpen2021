@@ -15,18 +15,30 @@ const Otsikko = ({ text }) => {
   )
 }
 
-/*const Best = ({points, anecdotes}) => {
+const Best = ({points, anecdotes}) => {
 
+  let paras = (Math.max(...points))
+  let indeksi = 0
+  for(let i = 0; i < points.length; i++){
+    if (points[i] === paras){
+      indeksi = i
+    }
+  }
+
+  let anec = anecdotes[indeksi]
+  console.log('paras', paras)
+  console.log(indeksi)
 
 
   return (
     <div>
-
+      <p>{anec}</p>
+      <p> has {paras} votes</p>
     </div>
     
   )
 
-}*/
+}
 
 const App = () => {
   const anecdotes = [
@@ -41,7 +53,7 @@ const App = () => {
 
   const [selected, setSelected] = useState(0)
   const [points, setPoints] = useState(new Array(anecdotes.length).fill(0))
-  const [best, setBest] = useState(0)
+
 
   const nextAnec = () => {
     let valittu = Math.floor(Math.random() * (anecdotes.length))
@@ -54,11 +66,6 @@ const App = () => {
     copy[selected] += 1
     setPoints(copy)
 
-    points.forEach(element => {
-      if (element > best) {
-        setBest(element)
-      }
-    });
   }
 
   return (
@@ -69,8 +76,7 @@ const App = () => {
       <Button handleClick={vote} text='vote' />
       <Button handleClick={nextAnec} text='next anecdote' />
       <Otsikko text='Most valuable anecdote' />
-      <p>{anecdotes[points.indexOf(best)]}</p>
-      <p> has {best} votes</p>
+      <Best points = {points} anecdotes = {anecdotes} />
     </div>
   )
 }
