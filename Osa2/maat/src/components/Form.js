@@ -1,10 +1,10 @@
-import React from "react";
+import react from "react";
 
-const Filter = ({ text, action }) => {
+const Form = ({ text, action }) => {
     return (
         <form>
             <div>
-                filter shown with
+                find countries
                 <input
                     value={text}
                     onChange={action} />
@@ -13,4 +13,4 @@ const Filter = ({ text, action }) => {
     )
 }
 
-export default Filter
+export default Form
