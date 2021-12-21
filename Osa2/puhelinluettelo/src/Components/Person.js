@@ -1,9 +1,12 @@
 import React from "react";
 
-const Person = ({ person }) => {
+const Person = ({ person, toggleDelete }) => {
 
-    return(
-        <p>{person.name} {person.number}</p>
+    return (
+        <p>
+            {person.name} {person.number}
+            <button onClick={toggleDelete}>Delete</button>
+        </p>
     )
 }
 

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import Person from './Components/Person'
 import filterPersons from './Components/Filter'
 import Filter from './Components/FilterForm'
+import personsService from './services/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -11,15 +11,13 @@ const App = () => {
   const [search, setSearch] = useState('')
 
 
-  const hook = () => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        setPersons(response.data)
+  useEffect(() => {
+    personsService
+      .getAll()
+      .then(initialPersons => {
+        setPersons(initialPersons)
       })
-  }
-  
-  useEffect(hook, [])
+  }, [])
 
   const handleNameChange = (event) => {
     setNewName(event.target.value)
@@ -31,12 +29,12 @@ const App = () => {
 
   const handleSearchChange = (event) => {
     setSearch(event.target.value)
-  }  
+  }
 
   const addPerson = (event) => {
     event.preventDefault()
 
-    const noteObject = {
+    const newObject = {
       name: newName,
       number: newNum
     }
@@ -46,11 +44,29 @@ const App = () => {
       window.alert(`${newName} is already added to phonebook`)
     }
     else {
-      setPersons(persons.concat(noteObject))
+      personsService
+        .create(newObject)
+        .then(returnedPerson => {
+          setPersons(persons.concat(returnedPerson))
+        })
+
     }
     setNewName('')
     setNewNum('')
   }
+
+  const toggleDelete = (id) => {
+    const person = persons.find(n => n.id === id)
+    const result = window.confirm(`Delete ${person.name}`)
+    if (result === true) {
+      personsService
+        .poisto(id)
+        .then(
+          setPersons(persons.filter(n => n.id !== id)))
+    }
+
+  }
+
 
   const personsToShow = filterPersons(persons, search)
 
@@ -58,7 +74,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Filter text={search} action={handleSearchChange}/>
+      <Filter text={search} action={handleSearchChange} />
       <h2>add a new</h2>
       <form onSubmit={addPerson}>
         <div>
@@ -78,9 +94,13 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       <div>
-      {personsToShow.map(person =>
-          <Person key={person.name} person={person} />
-          )}
+        {personsToShow.map(person =>
+          <Person
+            key={person.id}
+            person={person}
+            toggleDelete={() => toggleDelete(person.id)}
+          />
+        )}
       </div>
     </div>
   )

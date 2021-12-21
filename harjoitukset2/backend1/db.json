@@ -25,28 +25,28 @@
     },
     {
       "content": " Kettukarkki",
-      "important": true,
+      "important": false,
       "id": 5
     },
     {
       "content": "Kettukarkki3",
-      "important": true,
+      "important": false,
       "id": 6
     },
     {
       "content": " Kukkuu kuuluu",
-      "important": false,
+      "important": true,
       "id": 7
     },
     {
       "content": " Moi ;)",
-      "important": false,
+      "important": true,
       "id": 8
     },
     {
       "content": " Hei",
       "date": "2021-12-20T12:03:40.513Z",
-      "important": false,
+      "important": true,
       "id": 9
     }
   ]
