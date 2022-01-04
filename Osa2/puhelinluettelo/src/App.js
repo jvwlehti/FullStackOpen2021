@@ -5,6 +5,7 @@ import Filter from './Components/FilterForm'
 import personsService from './services/persons'
 import Notification from './Components/Alert'
 import ErrorNotification from './Components/Error'
+import PersonAdd from './Components/AddPerson'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -116,22 +117,7 @@ const App = () => {
       <ErrorNotification message={errorMessage}/>
       <Filter text={search} action={handleSearchChange} />
       <h2>add a new</h2>
-      <form onSubmit={addPerson}>
-        <div>
-          name:
-          <input
-            value={newName}
-            onChange={handleNameChange} />
-        </div>
-        <div>number:
-          <input
-            value={newNum}
-            onChange={handleNumChange} />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <PersonAdd submit={addPerson} name={newName} nameChange={handleNameChange} num={newNum} numChange={handleNumChange}/>
       <h2>Numbers</h2>
       <div>
         {personsToShow.map(person =>
