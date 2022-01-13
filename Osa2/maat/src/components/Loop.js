@@ -1,5 +1,3 @@
-import Country from "./Country";
-
 const loop = ({ arr }) => {
 
     let array = []
