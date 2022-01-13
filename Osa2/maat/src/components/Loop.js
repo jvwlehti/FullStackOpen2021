@@ -12,7 +12,7 @@ const loop = ({ arr }) => {
 
     return (
         <ul>
-            {array.map(c => <li key={index}>{c}</li>)}
+            {array.map(c => <li key={c.toString()}>{c}</li>)}
         </ul>
         
     )
