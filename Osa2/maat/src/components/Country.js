@@ -1,26 +1,18 @@
-import react from "react";
-import App from "../App";
-import Form from "./Form";
+import Loop from "./Loop"
 
-const Country = () =>{
-
-    const countriesToShow = filterCountry(countries, search)
-
-    let expr = countriesToShow.length()
-
-    switch (expr) {
-        case expr > 10 :
-            return('Too many options, be more specific, please');
-            break;
-        case expr < 10 :
-            msg = countriesToShow
-            break;
-        case expr = 1 :
-            msg
-    }
-
+const Country = ({ country }) => {
+    
     return(
-        <p>china</p>
+        <div>
+            <h1>{country.name.common}</h1>
+            <li>Capital: {country.capital}</li>
+            <li>Population: {country.population}</li>
+            <h2>languages</h2>
+            <ul>
+                <Loop key={country.languages.key} arr={country.languages} />
+            </ul>
+            <img src = {country.flags.png}/>
+        </div>
     )
 }
 

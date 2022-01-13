@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Form from './components/Form'
-import Country from './components/Country'
+import Countries from './components/Countries'
 
 const App = () => {
   const [countries, setCountries] = useState([])
   const [search, setSearch] = useState('')
 
+  //hakee palvelimelta valtiot
   const hook = () => {
     axios
       .get('https://restcountries.com/v3.1/all')
@@ -17,29 +18,21 @@ const App = () => {
 
   useEffect(hook, [])
 
-
+ //käsittelee hakukentän
   const handlerSearch = (event) => {
     setSearch(event.target.value)
   }
 
   
 
-  const filterCountry = (arr, query) => {
-    return arr.filter(el => el.name.toLowerCase().indexOf(query.toLowerCase()) !== -1)
-  }
-
   return (
     <div>
       <Form text={search} action={handlerSearch}/>
-      <Country/>
+      <Countries count={countries} search={search}/>
     </div>
 
 
   )
 }
-
-
-
-
 
 export default App
