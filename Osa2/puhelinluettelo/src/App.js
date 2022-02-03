@@ -65,12 +65,10 @@ const App = () => {
             }, 3000)
           })
         .catch(error => {
-          console.log('tähän asti päästiin')
           setErrorMessage(`${newName} was already deleted from server`)
           setTimeout(() => {
             setErrorMessage(null)
           }, 3000)
-          console.log('ja tänne kans')
         })
       }
     }
@@ -82,6 +80,12 @@ const App = () => {
           setEffectMessage(`${newName} Added`)
           setTimeout(() => {
             setEffectMessage(null)
+          }, 3000)
+        })
+        .catch(err => {
+          setErrorMessage(err.response.data.error.toString())
+          setTimeout(() => {
+            setErrorMessage(null)
           }, 3000)
         })
 
